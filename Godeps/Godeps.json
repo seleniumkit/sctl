@@ -1,0 +1,11 @@
+{
+	"ImportPath": "github.com/seleniumkit/sctl",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/aandryashin/matchers",
+			"Rev": "5eb67beb188b5076812683a96c13bef79d970fd8"
+		}
+	]
+}
