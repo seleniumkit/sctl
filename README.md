@@ -23,7 +23,7 @@ $ sctl --dryRun
 ```
 
 ## Input file format
-See [example/input.json](example/input.json) for full example. In the **hosts** section of the file we define a set of named host lists with regions:
+See [example/input.json](test-data/input.json) for full example. In the **hosts** section of the file we define a set of named host lists with regions:
 ```
   "hosts": {
     "cloud": {

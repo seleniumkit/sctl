@@ -183,7 +183,7 @@ func output(quotaName string, browsers XmlBrowsers, outputDirectory string) erro
 }
 
 func printOutputFile(filePath string, browsers XmlBrowsers) error {
-	bytes, err := xml.Marshal(browsers)
+	bytes, err := marshalBrowsers(browsers)
 	if (err != nil) {
 		return err
 	}
