@@ -1,0 +1,30 @@
+{
+  "hosts": {
+    "cloud": {
+      "region-a": {
+        "selenium-cloud-a-[1:20].example.com": {
+          "port": 4444,
+          "count": 1
+        }
+      },
+      "region-b": {
+        "selenium-cloud-b-[1:20].example.com": {
+          "port": 4444,
+          "count": 2
+        }
+      }
+    }
+  },
+  
+  "quota": {
+    "test-quota": {
+      "firefox" : {
+        "defaultVersion": "33.0",
+        "versions": {
+          "33.0": "cloud",
+          "42.0": "cloud"
+        }
+      }
+    }
+  }
+}
