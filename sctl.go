@@ -170,7 +170,7 @@ func parseInputFile(filePath string) (*JsonInput, error) {
 }
 
 func marshalBrowsers(browsers XmlBrowsers) ([]byte, error) {
-	return xml.Marshal(browsers)
+	return xml.MarshalIndent(browsers, "", "    ")
 }
 
 func output(quotaName string, browsers XmlBrowsers, outputDirectory string) error {
