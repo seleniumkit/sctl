@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"path"
 	"os"
+	"sort"
 )
 
 const (
@@ -93,8 +94,13 @@ func main() {
 		os.Exit(1)
 	}
 	files := convert(*input)
-	for name, browsers := range files {
-		if err := output(name, browsers, *outputDirectory); err != nil {
+	names := []string{}
+	for name := range files { 
+		names = append(names, name) 
+	}
+	sort.Strings(names)
+	for _, name := range names {
+		if err := output(name, files[name], *outputDirectory); err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
