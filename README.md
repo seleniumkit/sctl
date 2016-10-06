@@ -23,7 +23,7 @@ $ sctl --dryRun
 ```
 
 ## Input file format
-See [example/input.json](test-data/input.json) for full example. In the **hosts** section of the file we define a set of named host lists with regions:
+See [test-data/input.json](test-data/input.json) for full example. In the **hosts** section of the file we define a set of named host lists with regions:
 ```
   "hosts": {
     "cloud": {
@@ -62,4 +62,5 @@ In **quota** section we define quota names, browser names, their versions and us
     }
   }
 ```
-Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group. 
+Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group.
+In **aliases** section we define aliases for quota blocks from **quota** section. For each defined alias quota contents will be copied to a separate file with new name.
