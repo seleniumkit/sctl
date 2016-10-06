@@ -26,5 +26,9 @@
         }
       }
     }
+  },
+  
+  "aliases": {
+    "test-quota": ["another-quota"]
   }
 }

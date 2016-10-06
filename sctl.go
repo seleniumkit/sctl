@@ -48,6 +48,7 @@ type JsonQuota map[string]JsonBrowser
 type JsonInput struct {
 	Hosts JsonHosts `json:"hosts"`
 	Quota map[string]JsonQuota `json:"quota"`
+	Aliases map[string] []string `json:"aliases"`
 }
 
 // Output data
@@ -104,35 +105,50 @@ func convert(input JsonInput) map[string] XmlBrowsers {
 	ret := make(map[string] XmlBrowsers)
 	hostsMap := input.Hosts
 	quotaMap := input.Quota
+	aliasesMap := input.Aliases
 	for quotaName, quota := range quotaMap {
-		browsers := []XmlBrowser{}
-		for browserName, browser := range quota {
-			xmlVersions := []XmlVersion{}
-			for versionName, hostsRef := range browser.Versions {
-				regions := hostsMap[hostsRef]
-				if (regions != nil) {
-					xmlVersion := XmlVersion{
-						Number: versionName,
-						Regions: jsonRegionsToXmlRegions(regions),
-					}
-					xmlVersions = append(xmlVersions, xmlVersion)
-				} else {
-					fmt.Printf("Missing host reference %s for browser %s:%s:%s", hostsRef, quotaName, browserName, versionName)
-					os.Exit(1)
-				}
+		ret[quotaName] = createQuota(quotaName, hostsMap, quota)
+	}
+	for quotaName, aliases := range aliasesMap {
+		if _, ok := ret[quotaName]; ok {
+			for _, alias := range aliases {
+				ret[alias] = ret[quotaName]
 			}
-			xmlBrowser := XmlBrowser{
-				Name: browserName,
-				DefaultVersion: browser.DefaultVersion,
-				Versions: xmlVersions,
-			}
-			browsers = append(browsers, xmlBrowser)
-		}
-		ret[quotaName] = XmlBrowsers{
-			Browsers: browsers,
+		} else {
+			fmt.Printf("Missing reference quota %s", quotaName)
+			os.Exit(1)
 		}
 	}
 	return ret
+}
+
+func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrowsers {
+	browsers := []XmlBrowser{}
+	for browserName, browser := range quota {
+		xmlVersions := []XmlVersion{}
+		for versionName, hostsRef := range browser.Versions {
+			regions := hostsMap[hostsRef]
+			if (regions != nil) {
+				xmlVersion := XmlVersion{
+					Number: versionName,
+					Regions: jsonRegionsToXmlRegions(regions),
+				}
+				xmlVersions = append(xmlVersions, xmlVersion)
+			} else {
+				fmt.Printf("Missing host reference %s for browser %s:%s:%s", hostsRef, quotaName, browserName, versionName)
+				os.Exit(1)
+			}
+		}
+		xmlBrowser := XmlBrowser{
+			Name: browserName,
+			DefaultVersion: browser.DefaultVersion,
+			Versions: xmlVersions,
+		}
+		browsers = append(browsers, xmlBrowser)
+	}
+	return XmlBrowsers{
+		Browsers: browsers,
+	}
 }
 
 func jsonRegionsToXmlRegions(regions JsonRegions) []XmlRegion {
