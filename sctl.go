@@ -115,7 +115,7 @@ func convert(input JsonInput) map[string] XmlBrowsers {
 				ret[alias] = ret[quotaName]
 			}
 		} else {
-			fmt.Printf("Missing reference quota %s", quotaName)
+			fmt.Printf("Missing reference quota %s\n", quotaName)
 			os.Exit(1)
 		}
 	}
@@ -135,7 +135,7 @@ func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrows
 				}
 				xmlVersions = append(xmlVersions, xmlVersion)
 			} else {
-				fmt.Printf("Missing host reference %s for browser %s:%s:%s", hostsRef, quotaName, browserName, versionName)
+				fmt.Printf("Missing host reference %s for browser %s:%s:%s\n", hostsRef, quotaName, browserName, versionName)
 				os.Exit(1)
 			}
 		}
