@@ -55,7 +55,8 @@ type JsonInput struct {
 // Output data
 
 type XmlBrowsers struct {
-	XMLName  xml.Name  `xml:"urn:config.gridrouter.qatools.ru browsers"`
+	XMLName  xml.Name  `xml:"qa:browsers"`
+	XmlNS    string    `xml:"xmlns:qa,attr"`
 	Browsers []XmlBrowser `xml:"browser"`
 }
 
@@ -154,6 +155,7 @@ func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrows
 	}
 	return XmlBrowsers{
 		Browsers: browsers,
+		XmlNS: "urn:config.gridrouter.qatools.ru",
 	}
 }
 
