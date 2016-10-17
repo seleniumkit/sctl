@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestParseInputFile(t *testing.T) {
-	input, err := parseInputFile("test-data/input.json")
+	input, err := parseInputFile("../test-data/input.json")
 	AssertThat(t, err, Is{nil})
 	AssertThat(t, len(input.Hosts), EqualTo{1})
 	AssertThat(t, len(input.Quota), EqualTo{1})
@@ -20,7 +20,7 @@ func TestParseHostPattern(t *testing.T) {
 }
 
 func TestConvert(t *testing.T) {
-	input, _ := parseInputFile("test-data/input.json")
+	input, _ := parseInputFile("../test-data/input.json")
 	output := convert(*input)
 	_, containsKey := output["test-quota"]
 	AssertThat(t, containsKey, Is{true})

@@ -4,8 +4,16 @@
 	"GodepVersion": "v74",
 	"Deps": [
 		{
-			"ImportPath": "github.com/aandryashin/matchers",
-			"Rev": "5eb67beb188b5076812683a96c13bef79d970fd8"
+			"ImportPath": "github.com/inconshreveable/mousetrap",
+			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+		},
+		{
+			"ImportPath": "github.com/spf13/cobra",
+			"Rev": "856b96dcb49d6427babe192998a35190a12c2230"
+		},
+		{
+			"ImportPath": "github.com/spf13/pflag",
+			"Rev": "bf8481a6aebc13a8aab52e699ffe2e79771f5a3f"
 		}
 	]
 }

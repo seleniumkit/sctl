@@ -9,17 +9,28 @@ We use [godep](https://github.com/tools/godep) for dependencies management so en
 3. Build as usually: ```$ go build```
 
 ## Running
-When run without arguments **sctl** tries to read **input.json** file in current directory and outputs XML files to the same directory:
+## Generating quota files
+Use **sctl generate** command. When run without arguments it tries to read **input.json** file in current directory and outputs XML files to the same directory:
 ```
-$ sctl
+$ sctl generate
 ```
 You may want to adjust input file and output directory like the following:
 ```
-$ sctl --inputFile /path/to/input.json --outputDirectory /path/to/output/directory
+$ sctl generate --inputFile /path/to/input.json --outputDirectory /path/to/output/directory
 ```
 If you want to view what will be outputted without actually creating XML files use "dry run" mode:
 ```
-$ sctl --dryRun
+$ sctl generate --dryRun
+```
+
+## Showing quota statistics
+Use **sctl stat** command:
+```
+$ sctl stat --inputFile /path/to/input.json
+```
+Additionally you can only show information for one quota:
+```
+$ sctl stat --inputFile /path/to/input.json --quotaName test-quota
 ```
 
 ## Input file format
