@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 	"os"
 )
 
@@ -13,7 +13,7 @@ var statCmd = &cobra.Command{
 	Short: "Show quota statistics using JSON input file",
 	Run: func(cmd *cobra.Command, args []string) {
 		input, err := parseInputFile(inputFilePath)
-		if (err != nil) {
+		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
@@ -42,7 +42,7 @@ func printStat(input JsonInput, quotaName string) {
 		}
 	}
 
-	if (len(quotaName) > 0) {
+	if len(quotaName) > 0 {
 		if _, ok := quotaMap[quotaName]; ok {
 			processJsonQuota(quotaName, quotaMap[quotaName], hostsMap)
 		} else {
@@ -63,7 +63,7 @@ func processJsonQuota(quotaName string, quota JsonQuota, hostsMap JsonHosts) {
 	for browserName, browser := range quota {
 		for versionName, hostsRef := range browser.Versions {
 			regions := hostsMap[hostsRef]
-			if (regions != nil) {
+			if regions != nil {
 				regionsStat := ""
 				for regionName, region := range regions {
 					regionTotal := 0
@@ -73,7 +73,7 @@ func processJsonQuota(quotaName string, quota JsonQuota, hostsMap JsonHosts) {
 					}
 					regionsStat += fmt.Sprintf(" %s = %d", regionName, regionTotal)
 				}
-				if (len(regionsStat) > 0) {
+				if len(regionsStat) > 0 {
 					fmt.Printf("%s %s%s\n", browserName, versionName, regionsStat)
 				}
 			}
@@ -82,4 +82,3 @@ func processJsonQuota(quotaName string, quota JsonQuota, hostsMap JsonHosts) {
 	fmt.Println()
 
 }
-

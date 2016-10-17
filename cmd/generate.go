@@ -1,17 +1,17 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"encoding/json"
-	"fmt"
 	"encoding/xml"
-	"path"
-	"io/ioutil"
-	"regexp"
-	"os"
 	"errors"
-	"strconv"
+	"fmt"
+	"github.com/spf13/cobra"
+	"io/ioutil"
+	"os"
+	"path"
+	"regexp"
 	"sort"
+	"strconv"
 )
 
 const (
@@ -20,7 +20,7 @@ const (
 
 var (
 	outputDirectory string
-	dryRun bool
+	dryRun          bool
 )
 
 var generateCmd = &cobra.Command{
@@ -28,7 +28,7 @@ var generateCmd = &cobra.Command{
 	Short: "Generate XML quota using JSON input file",
 	Run: func(cmd *cobra.Command, args []string) {
 		input, err := parseInputFile(inputFilePath)
-		if (err != nil) {
+		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
@@ -53,8 +53,8 @@ func init() {
 	generateCmd.PersistentFlags().BoolVar(&dryRun, "dryRun", false, "whether to send output to stdout instead of writing files")
 }
 
-func convert(input JsonInput) map[string] XmlBrowsers {
-	ret := make(map[string] XmlBrowsers)
+func convert(input JsonInput) map[string]XmlBrowsers {
+	ret := make(map[string]XmlBrowsers)
 	hostsMap := input.Hosts
 	quotaMap := input.Quota
 	aliasesMap := input.Aliases
@@ -80,9 +80,9 @@ func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrows
 		xmlVersions := []XmlVersion{}
 		for versionName, hostsRef := range browser.Versions {
 			regions := hostsMap[hostsRef]
-			if (regions != nil) {
+			if regions != nil {
 				xmlVersion := XmlVersion{
-					Number: versionName,
+					Number:  versionName,
 					Regions: jsonRegionsToXmlRegions(regions),
 				}
 				xmlVersions = append(xmlVersions, xmlVersion)
@@ -92,15 +92,15 @@ func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrows
 			}
 		}
 		xmlBrowser := XmlBrowser{
-			Name: browserName,
+			Name:           browserName,
 			DefaultVersion: browser.DefaultVersion,
-			Versions: xmlVersions,
+			Versions:       xmlVersions,
 		}
 		browsers = append(browsers, xmlBrowser)
 	}
 	return XmlBrowsers{
 		Browsers: browsers,
-		XmlNS: "urn:config.gridrouter.qatools.ru",
+		XmlNS:    "urn:config.gridrouter.qatools.ru",
 	}
 }
 
@@ -112,14 +112,14 @@ func jsonRegionsToXmlRegions(regions JsonRegions) []XmlRegion {
 			hostNames := parseHostPattern(hostPattern)
 			for _, hostName := range hostNames {
 				xmlHosts = append(xmlHosts, XmlHost{
-					Name: hostName,
-					Port: host.Port,
+					Name:  hostName,
+					Port:  host.Port,
 					Count: host.Count,
 				})
 			}
 		}
 		xmlRegions = append(xmlRegions, XmlRegion{
-			Name: regionName,
+			Name:  regionName,
 			Hosts: xmlHosts,
 		})
 	}
@@ -143,8 +143,8 @@ func marshalBrowsers(browsers XmlBrowsers) ([]byte, error) {
 }
 
 func output(quotaName string, browsers XmlBrowsers, outputDirectory string) error {
-	filePath := path.Join(outputDirectory, quotaName + ".xml")
-	if (dryRun) {
+	filePath := path.Join(outputDirectory, quotaName+".xml")
+	if dryRun {
 		return printOutputFile(filePath, browsers)
 	} else {
 		return saveOutputFile(filePath, browsers)
@@ -153,7 +153,7 @@ func output(quotaName string, browsers XmlBrowsers, outputDirectory string) erro
 
 func printOutputFile(filePath string, browsers XmlBrowsers) error {
 	bytes, err := marshalBrowsers(browsers)
-	if (err != nil) {
+	if err != nil {
 		return err
 	}
 	fmt.Println(filePath)
@@ -165,7 +165,7 @@ func printOutputFile(filePath string, browsers XmlBrowsers) error {
 
 func saveOutputFile(filePath string, browsers XmlBrowsers) error {
 	bytes, err := marshalBrowsers(browsers)
-	if (err != nil) {
+	if err != nil {
 		return err
 	}
 	if err := ioutil.WriteFile(filePath, bytes, fileMode); err != nil {
@@ -183,7 +183,7 @@ func parseHostPattern(pattern string) []string {
 		from, _ := strconv.Atoi(pieces[2])
 		to, _ := strconv.Atoi(pieces[3])
 		tail := pieces[4]
-		if (from <= to) {
+		if from <= to {
 			ret := []string{}
 			for i := from; i <= to; i++ {
 				ret = append(ret, fmt.Sprintf("%s%d%s", head, i, tail))

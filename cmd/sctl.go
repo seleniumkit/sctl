@@ -7,7 +7,7 @@ import (
 
 var (
 	inputFilePath string
-	sctlCmd = &cobra.Command{
+	sctlCmd       = &cobra.Command{
 		Use:   "sctl",
 		Short: "sctl is a Selenium configuration management tool",
 		RunE: func(cmd *cobra.Command, args []string) error {
