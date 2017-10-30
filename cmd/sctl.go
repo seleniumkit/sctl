@@ -19,6 +19,7 @@ var (
 func Execute() {
 	sctlCmd.AddCommand(generateCmd)
 	sctlCmd.AddCommand(statCmd)
+	sctlCmd.AddCommand(versionCmd)
 
 	if _, err := sctlCmd.ExecuteC(); err != nil {
 		os.Exit(1)

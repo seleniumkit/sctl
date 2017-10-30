@@ -1,9 +1,47 @@
+sudo: required
 language: go
 
 go:
-  - 1.7
+  - 1.9.x
+
+services:
+  - docker
+
 script:
-  - go test -coverprofile=coverage.txt -covermode=atomic -coverpkg .
+  - go test -race -v github.com/seleniumkit/sctl/cmd -coverprofile=coverage.txt -covermode=atomic -coverpkg github.com/seleniumkit/sctl/cmd
+  - GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags "-X github.com/seleniumkit/sctl/cmd.buildStamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` -X github.com/seleniumkit/sctl/cmd.gitRevision=`git describe --tags || git rev-parse HEAD`"
+  - gox -os "linux darwin" -arch "amd64" -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}" -ldflags "-X main.buildStamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` -X main.gitRevision=`git describe --tags || git rev-parse HEAD`"
+
+before_install:
+  - go get -u github.com/golang/dep/cmd/dep
+
+install: 
+  - go get -u github.com/mitchellh/gox # cross compile
+  - dep ensure
+
+deploy:
+  - provider: releases
+    api-key: $GITHUB_TOKEN
+    file_glob: true
+    file: dist/*
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: script
+    script: travis/docker-push.sh latest
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: script
+    script: travis/docker-push.sh $TRAVIS_TAG
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: script
+    script: travis/docker-push.sh latest-release
+    skip_cleanup: true
+    on:
+      tags: true      
 
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash) -F unittests
