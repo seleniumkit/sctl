@@ -5,8 +5,10 @@ import "encoding/xml"
 // Input data
 
 type JsonHost struct {
-	Port  int `json:"port"`
-	Count int `json:"count"`
+	Port     int    `json:"port"`
+	Count    int    `json:"count"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type JsonRegion map[string]JsonHost
@@ -57,7 +59,9 @@ type XmlRegion struct {
 }
 
 type XmlHost struct {
-	Name  string `xml:"name,attr"`
-	Port  int    `xml:"port,attr"`
-	Count int    `xml:"count,attr"`
+	Name     string `xml:"name,attr"`
+	Port     int    `xml:"port,attr"`
+	Count    int    `xml:"count,attr"`
+	Username string `xml:"username,attr,omitempty"`
+	Password string `xml:"password,attr,omitempty"`
 }
