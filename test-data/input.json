@@ -13,8 +13,19 @@
           "count": 2
         }
       }
+    },
+    "cloud-provider": {
+      "provider-1" : {
+        "cloud-provider-[1:5].com": {
+          "port": 4444,
+          "count": 1,
+          "username": "user1",
+          "password": "Password1"
+        }
+      }
     }
   },
+
   
   "quota": {
     "test-quota": {
@@ -22,7 +33,8 @@
         "defaultVersion": "33.0",
         "versions": {
           "33.0": "cloud",
-          "42.0": "cloud"
+          "42.0": "cloud",
+          "43.0": "cloud-provider"
         }
       }
     }

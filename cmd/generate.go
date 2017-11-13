@@ -112,9 +112,9 @@ func jsonRegionsToXmlRegions(regions JsonRegions) []XmlRegion {
 			hostNames := parseHostPattern(hostPattern)
 			for _, hostName := range hostNames {
 				xmlHosts = append(xmlHosts, XmlHost{
-					Name:  hostName,
-					Port:  host.Port,
-					Count: host.Count,
+					Name:     hostName,
+					Port:     host.Port,
+					Count:    host.Count,
 					Username: host.Username,
 					Password: host.Password,
 				})

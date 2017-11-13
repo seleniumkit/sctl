@@ -76,7 +76,7 @@ In **quota** section we define quota names, browser names, their versions and us
 Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group.
 In **aliases** section we define aliases for quota blocks from **quota** section. For each defined alias quota contents will be copied to a separate file with new name.
 
-Cloud provider credentials can be included in the input file. See [test-data/input-cloud-provider.json](test-data/input-cloud-provider.json):
+Cloud provider credentials `username` and `password` can be included in the input file:
 ```
   "hosts": {
     "cloud-provider": {
