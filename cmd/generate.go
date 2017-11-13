@@ -115,6 +115,8 @@ func jsonRegionsToXmlRegions(regions JsonRegions) []XmlRegion {
 					Name:  hostName,
 					Port:  host.Port,
 					Count: host.Count,
+					Username: host.Username,
+					Password: host.Password,
 				})
 			}
 		}
