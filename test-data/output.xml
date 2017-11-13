@@ -1,176 +1,105 @@
-<browsers xmlns="urn:config.gridrouter.qatools.ru">
+<qa:browsers xmlns:qa="urn:config.gridrouter.qatools.ru">
     <browser name="firefox" defaultVersion="33.0">
-        <version number="42.0">
-            <region name="region-a">
-                <host name="selenium-cloud-a-1.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-2.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-3.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-4.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-5.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-6.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-7.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-8.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-9.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-10.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-11.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-12.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-13.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-14.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-15.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-16.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-17.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-18.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-19.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-20.example.com" port="4444"
-                      count="1"></host>
-            </region>
-            <region name="region-b">
-                <host name="selenium-cloud-b-1.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-2.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-3.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-4.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-5.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-6.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-7.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-8.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-9.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-10.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-11.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-12.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-13.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-14.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-15.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-16.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-17.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-18.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-19.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-20.example.com" port="4444"
-                      count="2"></host>
-            </region>
-        </version>
         <version number="33.0">
             <region name="region-a">
-                <host name="selenium-cloud-a-1.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-2.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-3.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-4.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-5.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-6.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-7.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-8.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-9.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-10.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-11.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-12.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-13.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-14.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-15.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-16.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-17.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-18.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-19.example.com" port="4444"
-                      count="1"></host>
-                <host name="selenium-cloud-a-20.example.com" port="4444"
-                      count="1"></host>
+                <host name="selenium-cloud-a-1.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-2.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-3.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-4.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-5.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-6.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-7.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-8.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-9.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-10.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-11.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-12.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-13.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-14.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-15.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-16.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-17.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-18.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-19.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-20.example.com" port="4444" count="1"></host>
             </region>
             <region name="region-b">
-                <host name="selenium-cloud-b-1.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-2.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-3.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-4.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-5.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-6.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-7.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-8.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-9.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-10.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-11.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-12.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-13.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-14.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-15.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-16.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-17.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-18.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-19.example.com" port="4444"
-                      count="2"></host>
-                <host name="selenium-cloud-b-20.example.com" port="4444"
-                      count="2"></host>
+                <host name="selenium-cloud-b-1.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-2.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-3.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-4.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-5.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-6.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-7.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-8.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-9.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-10.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-11.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-12.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-13.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-14.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-15.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-16.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-17.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-18.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-19.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-20.example.com" port="4444" count="2"></host>
+            </region>
+        </version>
+        <version number="42.0">
+            <region name="region-a">
+                <host name="selenium-cloud-a-1.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-2.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-3.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-4.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-5.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-6.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-7.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-8.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-9.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-10.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-11.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-12.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-13.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-14.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-15.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-16.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-17.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-18.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-19.example.com" port="4444" count="1"></host>
+                <host name="selenium-cloud-a-20.example.com" port="4444" count="1"></host>
+            </region>
+            <region name="region-b">
+                <host name="selenium-cloud-b-1.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-2.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-3.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-4.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-5.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-6.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-7.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-8.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-9.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-10.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-11.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-12.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-13.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-14.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-15.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-16.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-17.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-18.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-19.example.com" port="4444" count="2"></host>
+                <host name="selenium-cloud-b-20.example.com" port="4444" count="2"></host>
+            </region>
+        </version>
+        <version number="43.0">
+            <region name="provider-1">
+                <host name="cloud-provider-1.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-2.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-3.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-4.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-5.com" port="4444" count="1" username="user1" password="Password1"></host>
             </region>
         </version>
     </browser>
-</browsers>
+</qa:browsers>
