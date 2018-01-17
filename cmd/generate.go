@@ -191,7 +191,7 @@ func parseHostPattern(pattern string) []string {
 			ret := []string{}
 			for i := from; i <= to; i++ {
 				nullPrefix = ""
-				if (strings.HasPrefix(pieces[2], "0") && i < 10)  {
+				if strings.HasPrefix(pieces[2], "0") && i < 10 {
 					nullPrefix = "0"
 				}
 				ret = append(ret, fmt.Sprintf("%s%s%d%s", head, nullPrefix, i, tail))
