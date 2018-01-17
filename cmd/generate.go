@@ -12,6 +12,7 @@ import (
 	"regexp"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -180,6 +181,7 @@ func saveOutputFile(filePath string, browsers XmlBrowsers) error {
 func parseHostPattern(pattern string) []string {
 	re := regexp.MustCompile("(.*)\\[(\\d+):(\\d+)\\](.*)")
 	pieces := re.FindStringSubmatch(pattern)
+	nullPrefix := ""
 	if len(pieces) == 5 {
 		head := pieces[1]
 		from, _ := strconv.Atoi(pieces[2])
@@ -188,7 +190,11 @@ func parseHostPattern(pattern string) []string {
 		if from <= to {
 			ret := []string{}
 			for i := from; i <= to; i++ {
-				ret = append(ret, fmt.Sprintf("%s%d%s", head, i, tail))
+				nullPrefix = ""
+				if (strings.HasPrefix(pieces[2], "0") && i < 10)  {
+					nullPrefix = "0"
+				}
+				ret = append(ret, fmt.Sprintf("%s%s%d%s", head, nullPrefix, i, tail))
 			}
 			return ret
 		}
