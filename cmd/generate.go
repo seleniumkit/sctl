@@ -185,10 +185,11 @@ func parseHostPattern(pattern string) []string {
 		from, _ := strconv.Atoi(pieces[2])
 		to, _ := strconv.Atoi(pieces[3])
 		tail := pieces[4]
+		hostnameFmt := fmt.Sprintf("%%s%%0%dd%%s", len(pieces[2]))
 		if from <= to {
 			ret := []string{}
 			for i := from; i <= to; i++ {
-				ret = append(ret, fmt.Sprintf("%s%d%s", head, i, tail))
+				ret = append(ret, fmt.Sprintf(hostnameFmt, head, i, tail))
 			}
 			return ret
 		}

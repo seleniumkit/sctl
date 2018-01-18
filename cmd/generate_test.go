@@ -18,6 +18,7 @@ func TestParseHostPattern(t *testing.T) {
 	AssertThat(t, parseHostPattern("test[1:3]-host"), EqualTo{[]string{"test1-host", "test2-host", "test3-host"}})
 	AssertThat(t, parseHostPattern("[1:3]-host"), EqualTo{[]string{"1-host", "2-host", "3-host"}})
 	AssertThat(t, parseHostPattern("host-[1:3]"), EqualTo{[]string{"host-1", "host-2", "host-3"}})
+	AssertThat(t, parseHostPattern("host-[01:03]"), EqualTo{[]string{"host-01", "host-02", "host-03"}})
 }
 
 func TestConvert(t *testing.T) {
