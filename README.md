@@ -2,10 +2,10 @@
 This repository contains source code for simple Selenium quota management binary.
 
 ## Building
-We use [godep](https://github.com/tools/godep) for dependencies management so ensure it's installed before proceeding with next steps. To build the code:
+We use [dep](https://github.com/golang/dep) for dependencies management so ensure it's installed before proceeding with next steps. To build the code:
 
 1. Checkout this source tree: ```$ git clone https://github.com/seleniumkit/sctl.git```
-2. Download dependencies: ```$ godep restore```
+2. Download dependencies: ```$ dep ensure```
 3. Build as usually: ```$ go build```
 
 ## Running
