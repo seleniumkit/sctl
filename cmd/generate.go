@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	ggr "github.com/aerokube/ggr/config"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 	"os"
@@ -12,6 +13,7 @@ import (
 	"regexp"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -53,8 +55,8 @@ func init() {
 	generateCmd.PersistentFlags().BoolVar(&dryRun, "dryRun", false, "whether to send output to stdout instead of writing files")
 }
 
-func convert(input JsonInput) map[string]XmlBrowsers {
-	ret := make(map[string]XmlBrowsers)
+func convert(input Input) map[string]ggr.Browsers {
+	ret := make(map[string]ggr.Browsers)
 	hostsMap := input.Hosts
 	quotaMap := input.Quota
 	aliasesMap := input.Aliases
@@ -74,16 +76,20 @@ func convert(input JsonInput) map[string]XmlBrowsers {
 	return ret
 }
 
-func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrowsers {
-	browsers := []XmlBrowser{}
+func createQuota(quotaName string, hostsMap Hosts, quota Quota) ggr.Browsers {
+	var browsers []ggr.Browser
 	for browserName, browser := range quota {
-		xmlVersions := []XmlVersion{}
+		var xmlVersions []ggr.Version
 		for versionName, hostsRef := range browser.Versions {
 			regions := hostsMap[hostsRef]
 			if regions != nil {
-				xmlVersion := XmlVersion{
-					Number:  versionName,
+				version, platform := parseVersionPlatform(versionName)
+				xmlVersion := ggr.Version{
+					Number:  version,
 					Regions: jsonRegionsToXmlRegions(regions),
+				}
+				if platform != "" {
+					xmlVersion.Platform = platform
 				}
 				xmlVersions = append(xmlVersions, xmlVersion)
 			} else {
@@ -91,36 +97,49 @@ func createQuota(quotaName string, hostsMap JsonHosts, quota JsonQuota) XmlBrows
 				os.Exit(1)
 			}
 		}
-		xmlBrowser := XmlBrowser{
-			Name:           browserName,
-			DefaultVersion: browser.DefaultVersion,
-			Versions:       xmlVersions,
+		xmlBrowser := ggr.Browser{
+			Name:            browserName,
+			DefaultVersion:  browser.DefaultVersion,
+			DefaultPlatform: browser.DefaultPlatform,
+			Versions:        xmlVersions,
 		}
 		browsers = append(browsers, xmlBrowser)
 	}
-	return XmlBrowsers{
+	return ggr.Browsers{
 		Browsers: browsers,
-		XmlNS:    "urn:config.gridrouter.qatools.ru",
 	}
 }
 
-func jsonRegionsToXmlRegions(regions JsonRegions) []XmlRegion {
-	xmlRegions := []XmlRegion{}
+func parseVersionPlatform(s string) (string, string) {
+	const separator = "@"
+	pieces := strings.Split(s, separator)
+	if len(pieces) > 1 {
+		return pieces[0], strings.Join(pieces[1:], separator)
+	}
+	return s, ""
+}
+
+func jsonRegionsToXmlRegions(regions Regions) []ggr.Region {
+	var xmlRegions []ggr.Region
 	for regionName, region := range regions {
-		xmlHosts := XmlHosts{}
+		xmlHosts := ggr.Hosts{}
 		for hostPattern, host := range region {
 			hostNames := parseHostPattern(hostPattern)
 			for _, hostName := range hostNames {
-				xmlHosts = append(xmlHosts, XmlHost{
+				h := ggr.Host{
 					Name:     hostName,
 					Port:     host.Port,
 					Count:    host.Count,
 					Username: host.Username,
 					Password: host.Password,
-				})
+				}
+				if host.VNC != "" {
+					h.VNC = preProcessVNC(hostName, host.Port, host.VNC)
+				}
+				xmlHosts = append(xmlHosts, h)
 			}
 		}
-		xmlRegions = append(xmlRegions, XmlRegion{
+		xmlRegions = append(xmlRegions, ggr.Region{
 			Name:  regionName,
 			Hosts: xmlHosts,
 		})
@@ -128,23 +147,32 @@ func jsonRegionsToXmlRegions(regions JsonRegions) []XmlRegion {
 	return xmlRegions
 }
 
-func parseInputFile(filePath string) (*JsonInput, error) {
+func preProcessVNC(hostName string, port int, vnc string) string {
+	const selenoid = "selenoid"
+	const hostPattern = "$hostName"
+	if vnc == selenoid {
+		return fmt.Sprintf("ws://%s:%d/vnc", hostName, port)
+	}
+	return strings.Replace(vnc, hostPattern, hostName, -1)
+}
+
+func parseInputFile(filePath string) (*Input, error) {
 	bytes, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("error reading input file [%s]: %v", filePath, err))
 	}
-	input := new(JsonInput)
+	input := new(Input)
 	if err := json.Unmarshal(bytes, input); err != nil {
 		return nil, errors.New(fmt.Sprintf("error parsing input file [%s]: %v", filePath, err))
 	}
 	return input, nil
 }
 
-func marshalBrowsers(browsers XmlBrowsers) ([]byte, error) {
+func marshalBrowsers(browsers ggr.Browsers) ([]byte, error) {
 	return xml.MarshalIndent(browsers, "", "    ")
 }
 
-func output(quotaName string, browsers XmlBrowsers, outputDirectory string) error {
+func output(quotaName string, browsers ggr.Browsers, outputDirectory string) error {
 	filePath := path.Join(outputDirectory, quotaName+".xml")
 	if dryRun {
 		return printOutputFile(filePath, browsers)
@@ -153,7 +181,7 @@ func output(quotaName string, browsers XmlBrowsers, outputDirectory string) erro
 	}
 }
 
-func printOutputFile(filePath string, browsers XmlBrowsers) error {
+func printOutputFile(filePath string, browsers ggr.Browsers) error {
 	bytes, err := marshalBrowsers(browsers)
 	if err != nil {
 		return err
@@ -165,7 +193,7 @@ func printOutputFile(filePath string, browsers XmlBrowsers) error {
 	return nil
 }
 
-func saveOutputFile(filePath string, browsers XmlBrowsers) error {
+func saveOutputFile(filePath string, browsers ggr.Browsers) error {
 	bytes, err := marshalBrowsers(browsers)
 	if err != nil {
 		return err

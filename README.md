@@ -2,10 +2,10 @@
 This repository contains source code for simple Selenium quota management binary.
 
 ## Building
-We use [dep](https://github.com/golang/dep) for dependencies management so ensure it's installed before proceeding with next steps. To build the code:
+To build the code:
 
-1. Checkout this source tree: ```$ git clone https://github.com/seleniumkit/sctl.git```
-2. Download dependencies: ```$ dep ensure```
+1. Ensure you have [Golang](http://golang.org/) 1.11 and above.
+2. Checkout this source tree: ```$ git clone https://github.com/seleniumkit/sctl.git```
 3. Build as usually: ```$ go build```
 
 ## Running
@@ -65,15 +65,16 @@ In **quota** section we define quota names, browser names, their versions and us
     "test-quota": {
       "firefox" : {
         "defaultVersion": "33.0",
+        "defaultPlatform": "LINUX",
         "versions": {
           "33.0": "cloud",
-          "42.0": "cloud"
+          "42.0@LINUX": "cloud"
         }
       }
     }
   }
 ```
-Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group.
+To specify a platform use `@`-notation, e.g. `42.0@LINUX`. Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group.
 In **aliases** section we define aliases for quota blocks from **quota** section. For each defined alias quota contents will be copied to a separate file with new name.
 
 Cloud provider attributes `username` and `password` can be included in the input file:
@@ -87,6 +88,31 @@ Cloud provider attributes `username` and `password` can be included in the input
           "username": "user1",
           "password": "Password1"
         }
+      }
+    }
+  }
+```
+
+To specify VNC proxying settings - use `vnc` attribute as follows:
+```
+  "vnc-hosts": {
+    "some-dc" : {
+      "selenoid-host.example.com": {
+        "port": 4444,
+        "count": 1,
+        "vnc": "selenoid"
+      }
+    }
+  }
+```
+When `vnc` equals to `selenoid` then VNC will be set to `ws://host:port/vnc`, otherwise it will be set to specified value with `$hostName` placeholder is replaced by respective host name:
+```
+  "vnc-hosts": {
+    "some-dc" : {
+      "some-host-[1:5].example.com": {
+        "port": 4444,
+        "count": 5,
+        "vnc": "vnc://$hostName:5900"
       }
     }
   }

@@ -1,0 +1,17 @@
+github.com/aandryashin/matchers v0.0.0-20160729131923-5eb67beb188b/go.mod h1:cbmYNkm9xeQlNoWEPtOUcvNok2gSD7ErMnYkRW+eHi8=
+github.com/aandryashin/matchers v0.0.0-20161126170413-435295ea180e h1:ogUKYFNcdYUIBSLibE4+EjbTJazoHr5JsWWx21Lpn8c=
+github.com/aandryashin/matchers v0.0.0-20161126170413-435295ea180e/go.mod h1:cbmYNkm9xeQlNoWEPtOUcvNok2gSD7ErMnYkRW+eHi8=
+github.com/aandryashin/reloader v0.0.0-20161127125235-da4f1b43ce40/go.mod h1:gvg2/m9OQ4ZwK4Qk/mnfgokCb4qDN4BGyle+QGw4VOc=
+github.com/abbot/go-http-auth v0.0.0-20161224193827-d45c47bedec7/go.mod h1:Cz6ARTIzApMJDzh5bRMSUou6UMSp0IEXg9km/ci7TJM=
+github.com/aerokube/ggr v0.0.0-20181115182236-8957bfa069df h1:OGZ+YIqvdaJDdgYBF7UAWvHLWYNRUc8zyRS+Ar4O6tY=
+github.com/aerokube/ggr v0.0.0-20181115182236-8957bfa069df/go.mod h1:c4gg5wIR9PyppUSe4swKbNiSLO0vivf7THFs3rkcBIU=
+github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
+github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NHg9XEKhtSvM=
+github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
+github.com/spf13/cobra v0.0.0-20161014222036-856b96dcb49d h1:3DcijoKnes3z4/+YyF/0relm9aJJ8ypfyHHz0OWz1Z8=
+github.com/spf13/cobra v0.0.0-20161014222036-856b96dcb49d/go.mod h1:1l0Ry5zgKvJasoi3XT1TypsSe7PqH0Sj9dhYf7v3XqQ=
+github.com/spf13/pflag v0.0.0-20161011120826-bf8481a6aebc h1:WqY+0ieFwdU1nXJJPuhI6mqTo5mIUaPNM+xFvFK9RcA=
+github.com/spf13/pflag v0.0.0-20161011120826-bf8481a6aebc/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
+golang.org/x/crypto v0.0.0-20161221235747-f6b343c37ca8/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+golang.org/x/net v0.0.0-20170114055629-f2499483f923/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/sys v0.0.0-20180810173357-98c5dad5d1a0/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=

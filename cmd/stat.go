@@ -26,7 +26,7 @@ func init() {
 	statCmd.PersistentFlags().StringVar(&quotaName, "quotaName", "", "quota name")
 }
 
-func printStat(input JsonInput, quotaName string) {
+func printStat(input Input, quotaName string) {
 	hostsMap := input.Hosts
 	quotaMap := input.Quota
 	aliasesMap := input.Aliases
@@ -57,7 +57,7 @@ func printStat(input JsonInput, quotaName string) {
 
 }
 
-func processJsonQuota(quotaName string, quota JsonQuota, hostsMap JsonHosts) {
+func processJsonQuota(quotaName string, quota Quota, hostsMap Hosts) {
 	fmt.Println(quotaName)
 	fmt.Println("---")
 	for browserName, browser := range quota {

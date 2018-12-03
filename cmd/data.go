@@ -1,67 +1,31 @@
 package cmd
 
-import "encoding/xml"
-
-// Input data
-
-type JsonHost struct {
+type Host struct {
 	Port     int    `json:"port"`
 	Count    int    `json:"count"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	VNC      string `json:"vnc"`
 }
 
-type JsonRegion map[string]JsonHost
+type Region map[string]Host
 
-type JsonRegions map[string]JsonRegion
+type Regions map[string]Region
 
-type JsonHosts map[string]JsonRegions
+type Hosts map[string]Regions
 
-type JsonVersions map[string]string
+type Versions map[string]string
 
-type JsonBrowser struct {
-	DefaultVersion string       `json:"defaultVersion"`
-	Versions       JsonVersions `json:"versions"`
+type Browser struct {
+	DefaultVersion  string   `json:"defaultVersion"`
+	DefaultPlatform string   `json:"defaultPlatform"`
+	Versions        Versions `json:"versions"`
 }
 
-type JsonQuota map[string]JsonBrowser
+type Quota map[string]Browser
 
-type JsonInput struct {
-	Hosts   JsonHosts            `json:"hosts"`
-	Quota   map[string]JsonQuota `json:"quota"`
-	Aliases map[string][]string  `json:"aliases"`
-}
-
-// Output data
-
-type XmlBrowsers struct {
-	XMLName  xml.Name     `xml:"qa:browsers"`
-	XmlNS    string       `xml:"xmlns:qa,attr"`
-	Browsers []XmlBrowser `xml:"browser"`
-}
-
-type XmlBrowser struct {
-	Name           string       `xml:"name,attr"`
-	DefaultVersion string       `xml:"defaultVersion,attr"`
-	Versions       []XmlVersion `xml:"version"`
-}
-
-type XmlVersion struct {
-	Number  string      `xml:"number,attr"`
-	Regions []XmlRegion `xml:"region"`
-}
-
-type XmlHosts []XmlHost
-
-type XmlRegion struct {
-	Name  string   `xml:"name,attr"`
-	Hosts XmlHosts `xml:"host"`
-}
-
-type XmlHost struct {
-	Name     string `xml:"name,attr"`
-	Port     int    `xml:"port,attr"`
-	Count    int    `xml:"count,attr"`
-	Username string `xml:"username,attr,omitempty"`
-	Password string `xml:"password,attr,omitempty"`
+type Input struct {
+	Hosts   Hosts               `json:"hosts"`
+	Quota   map[string]Quota    `json:"quota"`
+	Aliases map[string][]string `json:"aliases"`
 }
