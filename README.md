@@ -65,15 +65,16 @@ In **quota** section we define quota names, browser names, their versions and us
     "test-quota": {
       "firefox" : {
         "defaultVersion": "33.0",
+        "defaultPlatform": "LINUX",
         "versions": {
           "33.0": "cloud",
-          "42.0": "cloud"
+          "42.0@LINUX": "cloud"
         }
       }
     }
   }
 ```
-Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group.
+To specify a platform use `@`-notation, e.g. `42.0@LINUX`. Here **test-quota** is free-form name of the quota, **firefox** is the browser name. Finally **versions** section contains a mapping of browser version to host group name, e.g. **firefox 33.0** will correspond to all hosts defined in **cloud** hosts group.
 In **aliases** section we define aliases for quota blocks from **quota** section. For each defined alias quota contents will be copied to a separate file with new name.
 
 Cloud provider attributes `username` and `password` can be included in the input file:

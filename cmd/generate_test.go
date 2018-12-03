@@ -31,20 +31,25 @@ func TestConvert(t *testing.T) {
 	browser := browsers[0]
 	AssertThat(t, browser.Name, EqualTo{"firefox"})
 	AssertThat(t, browser.DefaultVersion, EqualTo{"33.0"})
+	AssertThat(t, browser.DefaultPlatform, EqualTo{"LINUX"})
 
 	versions := browser.Versions
-	AssertThat(t, len(versions), EqualTo{3})
+	AssertThat(t, len(versions), EqualTo{4})
 
 	sort.Slice(versions, func(i, j int) bool {
 		return versions[i].Number < versions[j].Number
 	})
 
 	firstVersion := versions[0]
-	AssertThat(t, firstVersion.Number == "33.0", Is{true})
+	AssertThat(t, firstVersion.Number, EqualTo{"33.0"})
 	secondVersion := versions[1]
-	AssertThat(t, secondVersion.Number == "42.0", Is{true})
+	AssertThat(t, secondVersion.Number, EqualTo{"42.0"})
 	thirdVersion := versions[2]
-	AssertThat(t, thirdVersion.Number == "43.0", Is{true})
+	AssertThat(t, thirdVersion.Number, EqualTo{"43.0"})
+	AssertThat(t, thirdVersion.Platform, EqualTo{"LINUX"})
+	fourthVersion := versions[3]
+	AssertThat(t, fourthVersion.Number, EqualTo{"43.0"})
+	AssertThat(t, fourthVersion.Platform, EqualTo{"WINDOWS"})
 
 	firstRegions := firstVersion.Regions
 	AssertThat(t, len(firstRegions), EqualTo{2})
@@ -79,4 +84,18 @@ func TestConvert(t *testing.T) {
 		AssertThat(t, host.Username, EqualTo{"user1"})
 		AssertThat(t, host.Password, EqualTo{"Password1"})
 	}
+}
+
+func TestParseVersionPlatform(t *testing.T) {
+	v, p := parseVersionPlatform("some-string")
+	AssertThat(t, v, EqualTo{"some-string"})
+	AssertThat(t, p, EqualTo{""})
+
+	v, p = parseVersionPlatform("version@platform")
+	AssertThat(t, v, EqualTo{"version"})
+	AssertThat(t, p, EqualTo{"platform"})
+
+	v, p = parseVersionPlatform("version@platform@platform")
+	AssertThat(t, v, EqualTo{"version"})
+	AssertThat(t, p, EqualTo{"platform@platform"})
 }

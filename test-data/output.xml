@@ -1,5 +1,5 @@
 <qa:browsers xmlns:qa="urn:config.gridrouter.qatools.ru">
-    <browser name="firefox" defaultVersion="33.0">
+    <browser name="firefox" defaultVersion="33.0" defaultPlatform="LINUX">
         <version number="33.0">
             <region name="region-a">
                 <host name="selenium-cloud-a-1.example.com" port="4444" count="1"></host>
@@ -92,7 +92,16 @@
                 <host name="selenium-cloud-b-20.example.com" port="4444" count="2"></host>
             </region>
         </version>
-        <version number="43.0">
+        <version number="43.0" platform="LINUX">
+            <region name="provider-1">
+                <host name="cloud-provider-1.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-2.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-3.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-4.com" port="4444" count="1" username="user1" password="Password1"></host>
+                <host name="cloud-provider-5.com" port="4444" count="1" username="user1" password="Password1"></host>
+            </region>
+        </version>
+        <version number="43.0" platform="WINDOWS">
             <region name="provider-1">
                 <host name="cloud-provider-1.com" port="4444" count="1" username="user1" password="Password1"></host>
                 <host name="cloud-provider-2.com" port="4444" count="1" username="user1" password="Password1"></host>

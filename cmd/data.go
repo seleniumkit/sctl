@@ -16,8 +16,9 @@ type Hosts map[string]Regions
 type Versions map[string]string
 
 type Browser struct {
-	DefaultVersion string   `json:"defaultVersion"`
-	Versions       Versions `json:"versions"`
+	DefaultVersion  string   `json:"defaultVersion"`
+	DefaultPlatform string   `json:"defaultPlatform"`
+	Versions        Versions `json:"versions"`
 }
 
 type Quota map[string]Browser

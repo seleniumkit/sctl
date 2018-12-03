@@ -30,10 +30,12 @@
     "test-quota": {
       "firefox" : {
         "defaultVersion": "33.0",
+        "defaultPlatform": "LINUX",
         "versions": {
           "33.0": "cloud",
           "42.0": "cloud",
-          "43.0": "cloud-provider"
+          "43.0@LINUX": "cloud-provider",
+          "43.0@WINDOWS": "cloud-provider"
         }
       }
     }

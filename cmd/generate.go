@@ -13,6 +13,7 @@ import (
 	"regexp"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -82,9 +83,13 @@ func createQuota(quotaName string, hostsMap Hosts, quota Quota) ggr.Browsers {
 		for versionName, hostsRef := range browser.Versions {
 			regions := hostsMap[hostsRef]
 			if regions != nil {
+				version, platform := parseVersionPlatform(versionName)
 				xmlVersion := ggr.Version{
-					Number:  versionName,
+					Number:  version,
 					Regions: jsonRegionsToXmlRegions(regions),
+				}
+				if platform != "" {
+					xmlVersion.Platform = platform
 				}
 				xmlVersions = append(xmlVersions, xmlVersion)
 			} else {
@@ -93,15 +98,25 @@ func createQuota(quotaName string, hostsMap Hosts, quota Quota) ggr.Browsers {
 			}
 		}
 		xmlBrowser := ggr.Browser{
-			Name:           browserName,
-			DefaultVersion: browser.DefaultVersion,
-			Versions:       xmlVersions,
+			Name:            browserName,
+			DefaultVersion:  browser.DefaultVersion,
+			DefaultPlatform: browser.DefaultPlatform,
+			Versions:        xmlVersions,
 		}
 		browsers = append(browsers, xmlBrowser)
 	}
 	return ggr.Browsers{
 		Browsers: browsers,
 	}
+}
+
+func parseVersionPlatform(s string) (string, string) {
+	const separator = "@"
+	pieces := strings.Split(s, separator)
+	if len(pieces) > 1 {
+		return pieces[0], strings.Join(pieces[1:], separator)
+	}
+	return s, ""
 }
 
 func jsonRegionsToXmlRegions(regions Regions) []ggr.Region {
