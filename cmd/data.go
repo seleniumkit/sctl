@@ -5,6 +5,7 @@ type Host struct {
 	Count    int    `json:"count"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	VNC      string `json:"vnc"`
 }
 
 type Region map[string]Host

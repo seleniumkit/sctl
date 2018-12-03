@@ -23,6 +23,15 @@
           "password": "Password1"
         }
       }
+    },
+    "vnc-hosts": {
+      "some-dc": {
+        "selenoid-host.example.com": {
+          "port": 4444,
+          "count": 1,
+          "vnc": "selenoid"
+        }
+      }
     }
   },
   
@@ -34,8 +43,8 @@
         "versions": {
           "33.0": "cloud",
           "42.0": "cloud",
-          "43.0@LINUX": "cloud-provider",
-          "43.0@WINDOWS": "cloud-provider"
+          "43.0@WINDOWS": "cloud-provider",
+          "45.0@LINUX": "vnc-hosts"
         }
       }
     }

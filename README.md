@@ -92,3 +92,28 @@ Cloud provider attributes `username` and `password` can be included in the input
     }
   }
 ```
+
+To specify VNC proxying settings - use `vnc` attribute as follows:
+```
+  "vnc-hosts": {
+    "some-dc" : {
+      "selenoid-host.example.com": {
+        "port": 4444,
+        "count": 1,
+        "vnc": "selenoid"
+      }
+    }
+  }
+```
+When `vnc` equals to `selenoid` then VNC will be set to `ws://host:port/vnc`, otherwise it will be set to specified value with `$hostName` placeholder is replaced by respective host name:
+```
+  "vnc-hosts": {
+    "some-dc" : {
+      "some-host-[1:5].example.com": {
+        "port": 4444,
+        "count": 5,
+        "vnc": "vnc://$hostName:5900"
+      }
+    }
+  }
+```

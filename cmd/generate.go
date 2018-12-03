@@ -126,13 +126,17 @@ func jsonRegionsToXmlRegions(regions Regions) []ggr.Region {
 		for hostPattern, host := range region {
 			hostNames := parseHostPattern(hostPattern)
 			for _, hostName := range hostNames {
-				xmlHosts = append(xmlHosts, ggr.Host{
+				h := ggr.Host{
 					Name:     hostName,
 					Port:     host.Port,
 					Count:    host.Count,
 					Username: host.Username,
 					Password: host.Password,
-				})
+				}
+				if host.VNC != "" {
+					h.VNC = preProcessVNC(hostName, host.Port, host.VNC)
+				}
+				xmlHosts = append(xmlHosts, h)
 			}
 		}
 		xmlRegions = append(xmlRegions, ggr.Region{
@@ -141,6 +145,15 @@ func jsonRegionsToXmlRegions(regions Regions) []ggr.Region {
 		})
 	}
 	return xmlRegions
+}
+
+func preProcessVNC(hostName string, port int, vnc string) string {
+	const selenoid = "selenoid"
+	const hostPattern = "$hostName"
+	if vnc == selenoid {
+		return fmt.Sprintf("ws://%s:%d/vnc", hostName, port)
+	}
+	return strings.Replace(vnc, hostPattern, hostName, -1)
 }
 
 func parseInputFile(filePath string) (*Input, error) {

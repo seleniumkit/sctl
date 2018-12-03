@@ -9,7 +9,7 @@ import (
 func TestParseInputFile(t *testing.T) {
 	input, err := parseInputFile("../test-data/input.json")
 	AssertThat(t, err, Is{nil})
-	AssertThat(t, len(input.Hosts), EqualTo{2})
+	AssertThat(t, len(input.Hosts), EqualTo{3})
 	AssertThat(t, len(input.Quota), EqualTo{1})
 }
 
@@ -46,10 +46,10 @@ func TestConvert(t *testing.T) {
 	AssertThat(t, secondVersion.Number, EqualTo{"42.0"})
 	thirdVersion := versions[2]
 	AssertThat(t, thirdVersion.Number, EqualTo{"43.0"})
-	AssertThat(t, thirdVersion.Platform, EqualTo{"LINUX"})
+	AssertThat(t, thirdVersion.Platform, EqualTo{"WINDOWS"})
 	fourthVersion := versions[3]
-	AssertThat(t, fourthVersion.Number, EqualTo{"43.0"})
-	AssertThat(t, fourthVersion.Platform, EqualTo{"WINDOWS"})
+	AssertThat(t, fourthVersion.Number, EqualTo{"45.0"})
+	AssertThat(t, fourthVersion.Platform, EqualTo{"LINUX"})
 
 	firstRegions := firstVersion.Regions
 	AssertThat(t, len(firstRegions), EqualTo{2})
@@ -73,12 +73,20 @@ func TestConvert(t *testing.T) {
 		AssertThat(t, firstHost.Password == "" && secondHost.Password == "", Is{true})
 	}
 
-	secondRegions := thirdVersion.Regions
-	AssertThat(t, len(secondRegions), EqualTo{1})
-	region := secondRegions[0]
+	thirdRegions := thirdVersion.Regions
+	AssertThat(t, len(thirdRegions), EqualTo{1})
+	region := thirdRegions[0]
 	AssertThat(t, region.Name == "provider-1", Is{true})
 
 	AssertThat(t, len(region.Hosts), EqualTo{5})
+
+	fourthRegions := fourthVersion.Regions
+	AssertThat(t, len(fourthRegions), EqualTo{1})
+	fourthRegion := fourthRegions[0]
+	AssertThat(t, fourthRegion.Name == "some-dc", Is{true})
+	AssertThat(t, len(fourthRegion.Hosts), EqualTo{1})
+	vncHost := fourthRegion.Hosts[0]
+	AssertThat(t, vncHost.VNC, EqualTo{"ws://selenoid-host.example.com:4444/vnc"})
 
 	for _, host := range region.Hosts {
 		AssertThat(t, host.Username, EqualTo{"user1"})
@@ -98,4 +106,9 @@ func TestParseVersionPlatform(t *testing.T) {
 	v, p = parseVersionPlatform("version@platform@platform")
 	AssertThat(t, v, EqualTo{"version"})
 	AssertThat(t, p, EqualTo{"platform@platform"})
+}
+
+func TestPreProcessVNC(t *testing.T) {
+	AssertThat(t, preProcessVNC("selenoid-host.example.com", 4444, "selenoid"), EqualTo{"ws://selenoid-host.example.com:4444/vnc"})
+	AssertThat(t, preProcessVNC("vnc-host.example.com", 5900, "vnc://$hostName:5900"), EqualTo{"vnc://vnc-host.example.com:5900"})
 }
