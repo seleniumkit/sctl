@@ -1,0 +1,8 @@
+github.com/aandryashin/matchers v0.0.0-20161126170413-435295ea180e h1:ogUKYFNcdYUIBSLibE4+EjbTJazoHr5JsWWx21Lpn8c=
+github.com/aandryashin/matchers v0.0.0-20161126170413-435295ea180e/go.mod h1:cbmYNkm9xeQlNoWEPtOUcvNok2gSD7ErMnYkRW+eHi8=
+github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NHg9XEKhtSvM=
+github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
+github.com/spf13/cobra v0.0.0-20161014222036-856b96dcb49d h1:3DcijoKnes3z4/+YyF/0relm9aJJ8ypfyHHz0OWz1Z8=
+github.com/spf13/cobra v0.0.0-20161014222036-856b96dcb49d/go.mod h1:1l0Ry5zgKvJasoi3XT1TypsSe7PqH0Sj9dhYf7v3XqQ=
+github.com/spf13/pflag v0.0.0-20161011120826-bf8481a6aebc h1:WqY+0ieFwdU1nXJJPuhI6mqTo5mIUaPNM+xFvFK9RcA=
+github.com/spf13/pflag v0.0.0-20161011120826-bf8481a6aebc/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
