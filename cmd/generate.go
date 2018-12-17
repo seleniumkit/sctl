@@ -126,17 +126,20 @@ func jsonRegionsToXmlRegions(regions Regions) []ggr.Region {
 		for hostPattern, host := range region {
 			hostNames := parseHostPattern(hostPattern)
 			for _, hostName := range hostNames {
-				h := ggr.Host{
-					Name:     hostName,
-					Port:     host.Port,
-					Count:    host.Count,
-					Username: host.Username,
-					Password: host.Password,
+				ports := getPorts(host.Port, host.Ports)
+				for _, port := range ports {
+					h := ggr.Host{
+						Name:     hostName,
+						Port:     port,
+						Count:    host.Count,
+						Username: host.Username,
+						Password: host.Password,
+					}
+					if host.VNC != "" {
+						h.VNC = preProcessVNC(hostName, port, host.VNC)
+					}
+					xmlHosts = append(xmlHosts, h)
 				}
-				if host.VNC != "" {
-					h.VNC = preProcessVNC(hostName, host.Port, host.VNC)
-				}
-				xmlHosts = append(xmlHosts, h)
 			}
 		}
 		xmlRegions = append(xmlRegions, ggr.Region{
@@ -145,6 +148,19 @@ func jsonRegionsToXmlRegions(regions Regions) []ggr.Region {
 		})
 	}
 	return xmlRegions
+}
+
+func getPorts(port int, ports string) []int {
+	if ports != "" {
+		var ret []int
+		for _, maybePort := range parseHostPattern(ports) {
+			if port, err := strconv.Atoi(maybePort); err == nil {
+				ret = append(ret, port)
+			}
+		}
+		return ret
+	}
+	return []int{port}
 }
 
 func preProcessVNC(hostName string, port int, vnc string) string {

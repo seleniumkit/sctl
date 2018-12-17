@@ -2,6 +2,7 @@ package cmd
 
 type Host struct {
 	Port     int    `json:"port"`
+	Ports    string `json:"ports"`
 	Count    int    `json:"count"`
 	Username string `json:"username"`
 	Password string `json:"password"`

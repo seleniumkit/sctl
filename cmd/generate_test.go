@@ -112,3 +112,11 @@ func TestPreProcessVNC(t *testing.T) {
 	AssertThat(t, preProcessVNC("selenoid-host.example.com", 4444, "selenoid"), EqualTo{"ws://selenoid-host.example.com:4444/vnc"})
 	AssertThat(t, preProcessVNC("vnc-host.example.com", 5900, "vnc://$hostName:5900"), EqualTo{"vnc://vnc-host.example.com:5900"})
 }
+
+func TestGetPorts(t *testing.T) {
+	AssertThat(t, getPorts(4444, ""), EqualTo{[]int{4444}})
+	AssertThat(t, getPorts(4444, "4445"), EqualTo{[]int{4445}})
+	AssertThat(t, getPorts(4444, "444[5:8]"), EqualTo{[]int{4445, 4446, 4447, 4448}})
+	AssertThat(t, getPorts(4444, "44[5:8]4"), EqualTo{[]int{4454, 4464, 4474, 4484}})
+	AssertThat(t, len(getPorts(4444, "NaN")), EqualTo{0})
+}
