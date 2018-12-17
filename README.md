@@ -46,7 +46,7 @@ See [test-data/input.json](test-data/input.json) for full example. In the **host
       },
       "region-b": {
         "selenium-cloud-b-[1:40].example.com": {
-          "port": 4445,
+          "ports": "444[5:8]",
           "count": 2
         }
       }
